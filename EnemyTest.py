@@ -17,29 +17,35 @@ class StarBack(Sprite):
 class Enemy(Sprite):
     
     asset = ImageAsset("images/four_spaceship_by_albertov_with_thrust.png", 
-        Frame(227,0,292-227,125))
+        Frame(227,0,292-227,125), 4, 'vertical')
     
     def __init__(self, position):
         super().__init__(Enemy.asset, position)
-#        self.changeDirec
-#        self.fxcenter = self.fycenter = 0.5
         self.velx = 5
         self.vely = 5
-        
-#    def changeDirec(self):
+        self.fxcenter = self.fycenter = 0.5
+        self.dist = 0
+        self.frame = 0
+
+    def changeDirec(self):
 #        self.rotation = randint(0,1000)/500*pi
-#        self.velx = 5#/sin(self.rotation)
-#        self.vely = 5#/cos(self.rotation)
+        self.velx = 5#/sin(self.rotation)
+        self.vely = 5#/cos(self.rotation)
 #        self.dist = 0
+        if self.frame == 3:
+            self.frame = 0
+        else:
+            self.frame += 1
+        self.setImage(self.frame)
         
     def step(self):
-#        if self.x > SCREEN_WIDTH or self.x < 0 or self.y > SCREEN_HEIGHT or self.y < 0:
-#            self.changeDirec
-#        elif self.dist > SCREEN_DIAG/5 and randint(0,20) == 0:
-#            self.changeDirec
+        if self.x > SCREEN_WIDTH or self.x < 0 or self.y > SCREEN_HEIGHT or self.y < 0:
+            self.changeDirec()
+        elif self.dist > SCREEN_DIAG/5 and randint(0,20) == 0:
+            self.changeDirec()
         self.x += self.velx
         self.y += self.vely
-#        self.dist += 5
+        self.dist += 5
         
 class SpaceGame(App):
         
