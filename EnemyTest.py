@@ -21,17 +21,19 @@ class Enemy(Sprite):
     
     def __init__(self, position):
         super().__init__(Enemy.asset, position)
-        self.velx = 5
-        self.vely = 5
+        self.speed = 1
+        self.rotation = randint(0,1000)/500*pi
+        self.velx = self.speed/sin(self.rotation)
+        self.vely = self.speed/cos(self.rotation)
         self.fxcenter = self.fycenter = 0.5
         self.dist = 0
         self.frame = 0
 
     def changeDirec(self):
-#        self.rotation = randint(0,1000)/500*pi
-        self.velx = 5#/sin(self.rotation)
-        self.vely = 5#/cos(self.rotation)
-#        self.dist = 0
+        self.rotation = randint(0,1000)/500*pi
+        self.velx = self.speed/sin(self.rotation)
+        self.vely = self.speed/cos(self.rotation)
+        self.dist = 0
         if self.frame == 3:
             self.frame = 0
         else:
@@ -45,7 +47,7 @@ class Enemy(Sprite):
             self.changeDirec()
         self.x += self.velx
         self.y += self.vely
-        self.dist += 5
+        self.dist += self.speed
         
 class SpaceGame(App):
         
