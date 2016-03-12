@@ -16,7 +16,7 @@ class Thing(Sprite):
         super().__init__(Thing.asset, position)
         self.rotSpd = 0.1
         self.dist = 0
-        self.go = "false"
+        self.gomove = 0
 #        self.fxcenter = 0.5
 #        self.fycenter = 0.5
         ThingMove.listenKeyEvent("keydown", "right arrow", self.rotateRight)
@@ -30,15 +30,15 @@ class Thing(Sprite):
         self.rotation += self.rotSpd
         
     def go(self, event):
-        self.go = "true"
+        self.gomove = 1
         
     def step(self):
-        if self.dist < 50 and self.go == "true":
+        if self.dist < 50 and self.gomove == 1:
             self.x += 5
             self.y += 5
             self.dist += 5
         else:
-            self.go = "false"
+            self.gomove = 0
             self.dist = 0
     
 class ThingMove(App):
