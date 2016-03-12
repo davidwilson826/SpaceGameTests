@@ -13,7 +13,8 @@ class Thing(Sprite):
     def __init__(self, position):
         super().__init__(Thing.asset, position)
         self.rotSpd = 0.1
-        self.fxcenter = self.fycenter = 0.5
+        self.fxcenter = 0.5
+        self.fycenter = 0.5
         ThingMove.listenKeyEvent("keydown", "right arrow", self.rotateRight)
         ThingMove.listenKeyEvent("keydown", "left arrow", self.rotateLeft)
         
