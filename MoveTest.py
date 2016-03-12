@@ -1,4 +1,4 @@
-from ggame import App, Sprite, LineStyle, Color, PolygonAsset
+from ggame import App, Sprite, LineStyle, Color, PolygonAsset, CircleAsset
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
@@ -8,13 +8,14 @@ thinline = LineStyle(1, black)
 
 class Thing(Sprite):
     
-    asset = PolygonAsset([(0,100), (25,0), (50,100)], thinline, black)
+    #asset = PolygonAsset([(0,100), (25,0), (50,100)], thinline, black)
+    asset = CircleAsset(25, thinline, black)
     
     def __init__(self, position):
         super().__init__(Thing.asset, position)
         self.rotSpd = 0.1
-        self.fxcenter = 0.5
-        self.fycenter = 0.5
+#        self.fxcenter = 0.5
+#        self.fycenter = 0.5
         ThingMove.listenKeyEvent("keydown", "right arrow", self.rotateRight)
         ThingMove.listenKeyEvent("keydown", "left arrow", self.rotateLeft)
         
