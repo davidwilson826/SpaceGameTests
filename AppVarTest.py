@@ -1,14 +1,14 @@
-from ggame import App, Sprite, CircleAsset, Line, Color, Frame
+from ggame import App, Sprite, CircleAsset, LineStyle, Color, Frame, ImageAsset
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 
-black = Color(0)
-thinline = Line(0, 1)
+black = Color(0x000000, 1.0)
+thinline = LineStyle(1, black)
 
 class Player(Sprite):
     
-    asset = CircleAsset(10, black, thinline)
+    asset = CircleAsset(25, thinline, black)
     
     def __init__(self, position):
         super().__init__(Player.asset, position)
