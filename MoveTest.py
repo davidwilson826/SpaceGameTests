@@ -8,10 +8,20 @@ thinline = LineStyle(1, black)
 
 class Thing(Sprite):
     
-    asset = PolygonAsset([(0,100), (25,0) (50,100)], thinline, black)
+    asset = PolygonAsset([(0,100), (25,0), (50,100)], thinline, black)
     
     def __init__(self, position):
         super().__init__(Thing.asset, position)
+        self.fxcenter = self.fycenter = 0.5
+        self.rotSpd = 0.1
+        ThingMove.listenKeyEvent("keydown", "right arrow", self.rotateRight)
+        ThingMove.listenKeyEvent("keydown", "left arrow", self.rotateLeft)
+        
+    def rotateRight(self, event):
+        self.rotation -= self.rotSpd
+        
+    def rotateLeft(self, event):
+        self.rotation += self.rotSpd
     
 class ThingMove(App):
     
