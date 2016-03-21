@@ -23,16 +23,16 @@ class Enemy(Sprite):
         super().__init__(Enemy.asset, position)
         self.speed = 1
         self.rotation = randint(0,1000)/500*pi
-        self.velx = self.speed/sin(self.rotation)
-        self.vely = self.speed/cos(self.rotation)
+        self.velx = self.speed*sin(self.rotation)
+        self.vely = self.speed*cos(self.rotation)
         self.fxcenter = self.fycenter = 0.5
         self.dist = 0
         self.frame = 0
 
     def changeDirec(self):
         self.rotation = randint(0,1000)/500*pi
-        self.velx = self.speed/sin(self.rotation)
-        self.vely = self.speed/cos(self.rotation)
+        self.velx = self.speed*sin(self.rotation)
+        self.vely = self.speed*cos(self.rotation)
         self.dist = 0
         if self.frame == 3:
             self.frame = 0
