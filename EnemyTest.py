@@ -42,7 +42,7 @@ class Enemy(Sprite):
         
     def step(self):
         if self.x > SCREEN_WIDTH or self.x < 0 or self.y > SCREEN_HEIGHT or self.y < 0:
-            self.rotation = -1*self.rotation
+            self.rotation += pi
         elif self.dist > SCREEN_DIAG/5 and randint(0,20) == 0:
             self.changeDirec()
         self.x += self.velx
