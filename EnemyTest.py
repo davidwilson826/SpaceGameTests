@@ -6,10 +6,6 @@ SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 SCREEN_DIAG = sqrt(SCREEN_WIDTH**2+SCREEN_HEIGHT**2)
 
-def velcalc (rotation, speed, velx, vely):
-    velx = -1*speed*sin(rotation)
-    vely = -1*speed*cos(rotation)
-
 class StarBack(Sprite):
     
     asset = ImageAsset("images/starfield.jpg", Frame(0,0,SCREEN_WIDTH/2,SCREEN_HEIGHT/2))
@@ -27,20 +23,16 @@ class Enemy(Sprite):
         super().__init__(Enemy.asset, position)
         self.speed = 1
         self.rotation = randint(0,1000)/500*pi
-#        self.velx = self.speed*sin(self.rotation)
-#        self.vely = self.speed*cos(self.rotation)
-        self.velx = 0
-        self.vely = 0
-        velcalc(self.rotation, 5, self.velx, self.vely)
+        self.velx = -1*self.speed*sin(self.rotation)
+        self.vely = -1*self.speed*cos(self.rotation)
         self.fxcenter = self.fycenter = 0.5
         self.dist = 0
         self.frame = 0
 
     def changeDirec(self):
         self.rotation = randint(0,1000)/500*pi
-#        self.velx = self.speed*sin(self.rotation)
-#        self.vely = self.speed*cos(self.rotation)
-        velcalc(self.rotation, 5, self.velx, self.vely)
+        self.velx = -1*self.speed*sin(self.rotation)
+        self.vely = -1*self.speed*cos(self.rotation)
         self.dist = 0
         if self.frame == 3:
             self.frame = 0
@@ -49,12 +41,14 @@ class Enemy(Sprite):
         self.setImage(self.frame)
         
     def step(self):
-        if self.x > SCREEN_WIDTH or self.x < 0 or self.y > SCREEN_HEIGHT or self.y < 0:
-            self.rotation += pi
-        elif self.dist > SCREEN_DIAG/5 and randint(0,20) == 0:
-            self.changeDirec()
         self.x += self.velx
         self.y += self.vely
+        if self.x > SCREEN_WIDTH or self.x < 0 or self.y > SCREEN_HEIGHT or self.y < 0:
+            self.rotation += pi
+            self.velx = -1*self.speed*sin(self.rotation)
+            self.vely = -1*self.speed*cos(self.rotation)
+        elif self.dist > SCREEN_DIAG/5 and randint(0,20) == 0:
+            self.changeDirec()
         self.dist += self.speed
         
 class SpaceGame(App):
