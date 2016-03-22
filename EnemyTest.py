@@ -27,7 +27,7 @@ class Enemy(Sprite):
         self.vely = -1*self.speed*cos(self.rotation)
         self.fxcenter = self.fycenter = 0.5
         self.dist = 0
-        self.frame = 0
+        self.frame = 1
     
     def velocitySet(self):
         self.velx = -1*self.speed*sin(self.rotation)
@@ -37,15 +37,15 @@ class Enemy(Sprite):
         self.rotation = randint(0,1000)/500*pi
         self.velocitySet()
         self.dist = 0
-        if self.frame == 3:
-            self.frame = 0
-        else:
-            self.frame += 1
-        self.setImage(self.frame)
         
     def step(self):
         self.x += self.velx
         self.y += self.vely
+        if self.frame == 3:
+            self.frame = 1
+        else:
+            self.frame += 1
+        self.setImage(self.frame)
         if self.x > SCREEN_WIDTH or self.x < 0 or self.y > SCREEN_HEIGHT or self.y < 0:
             self.rotation += pi
             self.velocitySet()
