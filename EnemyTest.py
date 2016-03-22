@@ -28,11 +28,14 @@ class Enemy(Sprite):
         self.fxcenter = self.fycenter = 0.5
         self.dist = 0
         self.frame = 0
-
-    def changeDirec(self):
-        self.rotation = randint(0,1000)/500*pi
+    
+    def velocitySet(self):
         self.velx = -1*self.speed*sin(self.rotation)
         self.vely = -1*self.speed*cos(self.rotation)
+    
+    def changeDirec(self):
+        self.rotation = randint(0,1000)/500*pi
+        self.velocitySet()
         self.dist = 0
         if self.frame == 3:
             self.frame = 0
@@ -45,8 +48,7 @@ class Enemy(Sprite):
         self.y += self.vely
         if self.x > SCREEN_WIDTH or self.x < 0 or self.y > SCREEN_HEIGHT or self.y < 0:
             self.rotation += pi
-            self.velx = -1*self.speed*sin(self.rotation)
-            self.vely = -1*self.speed*cos(self.rotation)
+            self.velocitySet()
         elif self.dist > SCREEN_DIAG/5 and randint(0,20) == 0:
             self.changeDirec()
         self.dist += self.speed
