@@ -6,13 +6,14 @@ line = LineStyle(1,black)
 
 class Explosion(Sprite):
     
-#    asset = ImageAsset("images/explosion1.png", Frame(18,5,2,4), 9, 'horizontal')
-    asset = CircleAsset(50,line,black)
+    asset = ImageAsset("images/explosion1.png", Frame(0,0,128,128), 10)
+#    asset = CircleAsset(50,line,black)
     
     def __init__(self, position):
         super().__init__(Explosion.asset, position)
         self.fxcenter = self.fycenter = 0.5
         self.frame = 0
+        self.scale = 10
         
     def step(self):
         if self.frame == 8:
