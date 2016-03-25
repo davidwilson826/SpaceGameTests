@@ -1,8 +1,13 @@
-from ggame import App, Sprite, ImageAsset, Frame
+from ggame import App, Sprite, ImageAsset, Frame, CircleAsset, LineStyle, Color
+
+black = Color(0x000000, 1.0)
+
+line = LineStyle(1,black)
 
 class Explosion(Sprite):
     
-    asset = ImageAsset("images/explosion1.png", Frame(18,5,2,4), 9, 'horizontal')
+#    asset = ImageAsset("images/explosion1.png", Frame(18,5,2,4), 9, 'horizontal')
+    asset = CircleAsset(50,line,black)
     
     def __init__(self, position):
         super().__init__(Explosion.asset, position)
