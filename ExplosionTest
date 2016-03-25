@@ -1,4 +1,4 @@
-from ggame import App, Sprite, ImageAsset
+from ggame import App, Sprite, ImageAsset, Frame
 
 class Explosion(Sprite):
     
@@ -21,6 +21,7 @@ class SpaceWar(App):
 
     def __init__(self):
         super().__init__()
+        Explosion((500,500))
         
-app = SpaceWar
+app = SpaceWar()
 app.run()
