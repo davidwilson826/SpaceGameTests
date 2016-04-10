@@ -11,11 +11,10 @@ class Player(Sprite):
         self.fxcenter = self.fycenter = 0.5
         self.velocity = (0,0)
         self.rotSpd = 0.1
-        self.magnitude = 1
+        self.magnitude = 0.5
         SpaceGame.listenKeyEvent("keydown", "right arrow", self.rotateRight)
         SpaceGame.listenKeyEvent("keydown", "left arrow", self.rotateLeft)
         SpaceGame.listenKeyEvent("keydown", "up arrow", self.thrust)
-#        SpaceGame.listenKeyEvent("keyup", "up arrow", self.thrustOff)
         
     def rotateRight(self, event):
         self.rotation -= self.rotSpd
