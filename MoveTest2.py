@@ -9,7 +9,7 @@ class Player(Sprite):
     def __init__(self, position):
         super().__init__(Player.asset, position)
         self.fxcenter = self.fycenter = 0.5
-        self.velocity = (1,1)
+        self.velocity = (0,0)
         self.rotSpd = 0.1
         self.magnitude = 1
         SpaceGame.listenKeyEvent("keydown", "right arrow", self.rotateRight)
@@ -25,7 +25,8 @@ class Player(Sprite):
         
     def thrust(self, event):
         self.velocity[0] += -1*self.magnitude*sin(self.rotation)
-        self.velocity[1] += -1*self.magnitude*sin(self.rotation)
+        self.velocity[1] += -1*self.magnitude*cos(self.rotation)
+        print(self.velocity)
 
     def step(self):
         self.x += self.velocity[0]
