@@ -8,10 +8,13 @@ class Player(Sprite):
         
     def __init__(self, position):
         super().__init__(Player.asset, position)
-        self.velocity = (0,0)
+        self.fxcenter = self.fycenter = 0.5
+        self.velocity = (1,1)
+        self.rotSpd = 0.1
+        self.magnitude = 1
         SpaceGame.listenKeyEvent("keydown", "right arrow", self.rotateRight)
         SpaceGame.listenKeyEvent("keydown", "left arrow", self.rotateLeft)
-#        SpaceGame.listenKeyEvent("keydown", "up arrow", self.thrustOn)
+        SpaceGame.listenKeyEvent("keydown", "up arrow", self.thrust)
 #        SpaceGame.listenKeyEvent("keyup", "up arrow", self.thrustOff)
         
     def rotateRight(self, event):
@@ -20,7 +23,9 @@ class Player(Sprite):
     def rotateLeft(self, event):
         self.rotation += self.rotSpd
         
-#    def thrustOn(self, event):
+    def thrust(self, event):
+        self.velocity[0] += -1*self.magnitude*sin(self.rotation)
+        self.velocity[1] += -1*self.magnitude*sin(self.rotation)
 
     def step(self):
         self.x += self.velocity[0]
@@ -30,7 +35,7 @@ class SpaceGame(App):
     
     def __init__(self):
         super().__init__()
-        Player((100,100))
+        Player((500,300))
         
     def step(self):
         for x in self.getSpritesbyClass(Player):
