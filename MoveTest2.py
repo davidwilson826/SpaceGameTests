@@ -10,7 +10,7 @@ class Player(Sprite):
         super().__init__(Player.asset, position)
         self.fxcenter = self.fycenter = 0.5
         self.velocity = (0,0)
-        self.rotSpd = pi/8
+        self.rotSpd = pi/20
         self.magnitude = 0.25
         SpaceGame.listenKeyEvent("keydown", "right arrow", self.rotateRight)
         SpaceGame.listenKeyEvent("keydown", "left arrow", self.rotateLeft)
