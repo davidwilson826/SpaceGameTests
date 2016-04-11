@@ -14,12 +14,12 @@ class Enemy(Sprite):
         self.magnitude = 0.5
         
     def step(self):
-        if sqrt(self.velocity[0]**2 + self.velocity[1]**2) >= 3:
-            print('hello')
-        if randint(0,500) == 0:
+        if randint(0,300) == 0:
             self.rotation = randint(0,1000)/500*pi
             self.velocity[0] += -1*self.magnitude*sin(self.rotation)
             self.velocity[1] += -1*self.magnitude*cos(self.rotation)
+            if sqrt(self.velocity[0]**2 + self.velocity[1]**2) >= 1:
+                print('hello')
         self.x += self.velocity[0]
         self.y += self.velocity[1]
         
