@@ -1,5 +1,5 @@
 from ggame import App, Sprite, ImageAsset, Frame
-from math import sin, cos
+from math import sin, cos, pi
 
 class Player(Sprite):
     
@@ -10,7 +10,7 @@ class Player(Sprite):
         super().__init__(Player.asset, position)
         self.fxcenter = self.fycenter = 0.5
         self.velocity = (0,0)
-        self.rotSpd = 0.1
+        self.rotSpd = pi/8
         self.magnitude = 0.25
         SpaceGame.listenKeyEvent("keydown", "right arrow", self.rotateRight)
         SpaceGame.listenKeyEvent("keydown", "left arrow", self.rotateLeft)
