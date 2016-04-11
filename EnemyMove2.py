@@ -1,5 +1,5 @@
 from ggame import App, Sprite, ImageAsset, Frame
-from math import sin, cos, pi
+from math import sin, cos, pi, sqrt
 from random import randint
 
 class Enemy(Sprite):
@@ -11,13 +11,15 @@ class Enemy(Sprite):
         super().__init__(Enemy.asset, position)
         self.fxcenter = self.fycenter = 0.5
         self.velocity = (0,0)
-        self.magnitude = 0.25
+        self.magnitude = 0.5
         
     def step(self):
-        if randint(0,100) == 0:
+        if sqrt(self.velocity[0]**2 + self.velocity[1]**2) >= 3:
+            print('hello')
+        if randint(0,500) == 0:
             self.rotation = randint(0,1000)/500*pi
-            self.velocity = (sum(x) for x in zip(self.velocity, (-1*self.magnitude*sin(self.rotation),
-            -1*self.magnitude*cos(self.rotation))))
+            self.velocity[0] += -1*self.magnitude*sin(self.rotation)
+            self.velocity[1] += -1*self.magnitude*cos(self.rotation)
         self.x += self.velocity[0]
         self.y += self.velocity[1]
         
@@ -27,7 +29,8 @@ class SpaceGame(App):
         super().__init__()
         Enemy((500,300))
         
-    for x in self.getSpritesbyClass(Enemy):
-        x.step()
+    def step(self):    
+        for x in self.getSpritesbyClass(Enemy):
+            x.step()
         
 SpaceGame().run()
